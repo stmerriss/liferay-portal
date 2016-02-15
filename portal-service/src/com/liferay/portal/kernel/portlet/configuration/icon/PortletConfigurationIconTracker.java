@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 
 /**
  * @author Eudaldo Alonso
@@ -71,7 +70,7 @@ public class PortletConfigurationIconTracker {
 
 	public static List<PortletConfigurationIcon> getPortletConfigurationIcons(
 		String portletId, final PortletRequest portletRequest,
-		PortletResponse portletResponse, Comparator<?> comparator) {
+		Comparator<?> comparator) {
 
 		List<PortletConfigurationIcon> portletConfigurationIcons =
 			ListUtil.filter(
