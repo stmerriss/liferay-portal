@@ -30,9 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class BasePortletConfigurationIcon
 	implements PortletConfigurationIcon {
 
-	public BasePortletConfigurationIcon(PortletRequest portletRequest) {
-	}
-
 	@Override
 	public String getAlt() {
 		return null;
@@ -120,6 +117,11 @@ public abstract class BasePortletConfigurationIcon
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		return null;
+	}
+
+	@Override
+	public double getWeight() {
+		return 0;
 	}
 
 	/**

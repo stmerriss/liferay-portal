@@ -65,6 +65,8 @@ public interface PortletConfigurationIcon {
 	public String getURL(
 		PortletRequest portletRequest, PortletResponse portletResponse);
 
+	public double getWeight();
+
 	public boolean include(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException;
