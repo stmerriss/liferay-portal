@@ -14,10 +14,12 @@
 
 package com.liferay.dynamic.data.lists.web.portlet.configuration.icon;
 
+import com.liferay.dynamic.data.lists.constants.DDLPortletKeys;
 import com.liferay.dynamic.data.lists.service.permission.DDLRecordSetPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.configuration.icon.BaseJSPPortletConfigurationIcon;
+import com.liferay.portal.kernel.portlet.configuration.icon.PortletConfigurationIcon;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -28,17 +30,26 @@ import javax.portlet.PortletResponse;
 
 import javax.servlet.ServletContext;
 
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
 /**
  * @author Rafael Praxedes
  */
+@Component(
+	immediate = true,
+	property = {
+		"javax.portlet.name=" + DDLPortletKeys.DYNAMIC_DATA_LISTS,
+		"path=/view_record_set.jsp"
+	},
+	service = PortletConfigurationIcon.class
+)
 public class ExportDDLRecordSetPortletConfigurationIcon
 	extends BaseJSPPortletConfigurationIcon {
 
-	public ExportDDLRecordSetPortletConfigurationIcon(
-		ServletContext servletContext, String jspPath,
-		PortletRequest portletRequest) {
-
-		super(servletContext, jspPath, portletRequest);
+	@Override
+	public String getJspPath() {
+		return "/configuration/icon/export_record_set.jsp";
 	}
 
 	@Override
@@ -51,6 +62,11 @@ public class ExportDDLRecordSetPortletConfigurationIcon
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		return "javascript:;";
+	}
+
+	@Override
+	public double getWeight() {
+		return 102;
 	}
 
 	@Override
@@ -83,6 +99,15 @@ public class ExportDDLRecordSetPortletConfigurationIcon
 	@Override
 	public boolean isToolTip() {
 		return false;
+	}
+
+	@Override
+	@Reference(
+		target = "(osgi.web.symbolicname=com.liferay.dynamic.data.lists.web)",
+		unbind = "-"
+	)
+	public void setServletContext(ServletContext servletContext) {
+		super.setServletContext(servletContext);
 	}
 
 }

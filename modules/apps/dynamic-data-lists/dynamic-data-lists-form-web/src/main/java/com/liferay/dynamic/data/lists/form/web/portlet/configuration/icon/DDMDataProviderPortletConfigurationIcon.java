@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIcon;
+import com.liferay.portal.kernel.portlet.configuration.icon.PortletConfigurationIcon;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -28,17 +29,18 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowStateException;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
  * @author Rafael Praxedes
  */
+@Component(
+	immediate = true,
+	property = {"javax.portlet.name=" + com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys.DYNAMIC_DATA_LISTS_FORM_ADMIN},
+	service = PortletConfigurationIcon.class
+)
 public class DDMDataProviderPortletConfigurationIcon
 	extends BasePortletConfigurationIcon {
-
-	public DDMDataProviderPortletConfigurationIcon(
-		PortletRequest portletRequest) {
-
-		super(portletRequest);
-	}
 
 	@Override
 	public String getMessage(PortletRequest portletRequest) {
@@ -68,6 +70,11 @@ public class DDMDataProviderPortletConfigurationIcon
 
 		return "javascript:Liferay.DDL.Portlet.openDDMDataProvider('" +
 			portletURL.toString() + "');";
+	}
+
+	@Override
+	public double getWeight() {
+		return 103;
 	}
 
 	@Override
