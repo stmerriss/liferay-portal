@@ -192,7 +192,6 @@ public class LiferayPackageInstaller
 				bundle.uninstall();
 			}
 			catch (BundleException be) {
-				throw new RuntimeException(be);
 			}
 		}
 	}
